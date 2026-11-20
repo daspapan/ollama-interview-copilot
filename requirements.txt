@@ -1,0 +1,9 @@
+faster-whisper>=1.0
+soundcard>=0.4.3
+numpy
+requests
+Pillow
+pyobjc-framework-Quartz; sys_platform == "darwin"
+pyobjc-framework-Cocoa; sys_platform == "darwin"
+pynput; sys_platform != "darwin"
+anthropic   # only needed for --backend anthropic
