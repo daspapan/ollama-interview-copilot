@@ -68,3 +68,19 @@ python copilot.py --backend anthropic                      # Claude API (ANTHROP
 | Wrong mic used for ⌃⌥M | `--my-mic "MacBook"` (see `--list-devices`) |
 | Window size/position at start | `--geometry 500x700+1300+50 --font-size 15` |
 | First answer slow | Type a test question in the box before the call to load the model |
+
+
+
+Verson 2
+Core fixes for answers changing every sentence
+
+Tell the four kinds apart: new question, follow-up, more detail, or not a question. The model labels each interviewer turn with the first word of its reply, so this adds no extra delay.
+New question: the answer on screen is replaced.
+Follow-up: the previous answer shrinks to its one-line core answer and the follow-up answer appears below it, labelled “↳ Follow-up”.
+More detail on the same question: one or two “Also:” bullets are added at the bottom, and the existing points are never rewritten.
+Not a question: nothing changes.
+Keep the answer stable once it’s shown. An answer that has started showing is never wiped halfway. It’s only replaced when a genuinely new question arrives.
+Wait a little longer before answering. The copilot waits 1.2 seconds of silence instead of 0.7, so it stops answering half a question. The first word arrives about half a second later.
+Make the wording consistent. Lower the model’s randomness (temperature 0.3 to 0). If an answer does get regenerated, it says nearly the same thing in nearly the same words.
+Add ⌃⌥R: refresh the answer. This forces a fresh answer to the latest question, for when the app wrongly keeps an old one.
+Show the kind of turn in the status line. For example “New question”, “Follow-up”, “Added detail” or “Ignored”, so you can tell at a glance what the app decided.
